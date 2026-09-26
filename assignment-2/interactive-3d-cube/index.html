@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interactive 3D Cube | Computer Graphics Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Header -->
+    <header class="topbar">
+
+        <div>
+            <h1>Interactive 3D Cube</h1>
+            <p>Computer Graphics Lab — Assignment 2</p>
+        </div>
+
+        <div class="badge">
+            3D Transformations
+        </div>
+
+    </header>
+
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+
+        <!-- ============================= -->
+        <!-- LEFT: 3D VIEWPORT -->
+        <!-- ============================= -->
+
+        <section class="viewport-panel">
+
+            <div class="viewport-header">
+                <span>3D Viewport</span>
+                <span id="fpsText">-- FPS</span>
+            </div>
+
+            <canvas id="cubeCanvas"></canvas>
+
+            <div class="hint">
+                Drag to orbit camera • Scroll to zoom • Double-click to reset
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- RIGHT: CONTROL PANEL -->
+        <!-- ============================= -->
+
+        <aside class="controls">
+
+            <h2>Transformations</h2>
+
+
+            <!-- X Rotation -->
+            <div class="control-group">
+
+                <div class="label-row">
+
+                    <label for="rotX">
+                        X Rotation
+                    </label>
+
+                    <output id="rotXValue">
+                        25°
+                    </output>
+
+                </div>
+
+                <input
+                    id="rotX"
+                    type="range"
+                    min="-180"
+                    max="180"
+                    value="25"
+                >
+
+            </div>
+
+
+            <!-- Y Rotation -->
+            <div class="control-group">
+
+                <div class="label-row">
+
+                    <label for="rotY">
+                        Y Rotation
+                    </label>
+
+                    <output id="rotYValue">
+                        -25°
+                    </output>
+
+                </div>
+
+                <input
+                    id="rotY"
+                    type="range"
+                    min="-180"
+                    max="180"
+                    value="-25"
+                >
+
+            </div>
+
+
+            <!-- Z Rotation -->
+            <div class="control-group">
+
+                <div class="label-row">
+
+                    <label for="rotZ">
+                        Z Rotation
+                    </label>
+
+                    <output id="rotZValue">
+                        0°
+                    </output>
+
+                </div>
+
+                <input
+                    id="rotZ"
+                    type="range"
+                    min="-180"
+                    max="180"
+                    value="0"
+                >
+
+            </div>
+
+
+            <!-- Scale -->
+            <div class="control-group">
+
+                <div class="label-row">
+
+                    <label for="scale">
+                        3D Scale
+                    </label>
+
+                    <output id="scaleValue">
+                        1.00×
+                    </output>
+
+                </div>
+
+                <input
+                    id="scale"
+                    type="range"
+                    min="0.50"
+                    max="2.00"
+                    step="0.01"
+                    value="1"
+                >
+
+            </div>
+
+
+            <hr>
+
+
+            <!-- Camera -->
+            <h2>Camera / View</h2>
+
+
+            <!-- Camera Distance -->
+            <div class="control-group">
+
+                <div class="label-row">
+
+                    <label for="cameraDistance">
+                        Camera Distance
+                    </label>
+
+                    <output id="cameraDistanceValue">
+                        6.0
+                    </output>
+
+                </div>
+
+                <input
+                    id="cameraDistance"
+                    type="range"
+                    min="3.5"
+                    max="12"
+                    step="0.1"
+                    value="6"
+                >
+
+            </div>
+
+
+            <!-- Camera Yaw -->
+            <div class="control-group">
+
+                <div class="label-row">
+
+                    <label for="cameraYaw">
+                        Camera Yaw
+                    </label>
+
+                    <output id="cameraYawValue">
+                        0°
+                    </output>
+
+                </div>
+
+                <input
+                    id="cameraYaw"
+                    type="range"
+                    min="-80"
+                    max="80"
+                    value="0"
+                >
+
+            </div>
+
+
+            <!-- Camera Pitch -->
+            <div class="control-group">
+
+                <div class="label-row">
+
+                    <label for="cameraPitch">
+                        Camera Pitch
+                    </label>
+
+                    <output id="cameraPitchValue">
+                        0°
+                    </output>
+
+                </div>
+
+                <input
+                    id="cameraPitch"
+                    type="range"
+                    min="-60"
+                    max="60"
+                    value="0"
+                >
+
+            </div>
+
+
+            <hr>
+
+
+            <!-- Rendering -->
+            <h2>Rendering</h2>
+
+
+            <!-- Auto Rotate -->
+            <label class="switch-row">
+
+                <span>
+                    Auto Rotate
+                </span>
+
+                <input
+                    id="autoRotate"
+                    type="checkbox"
+                >
+
+                <span class="switch"></span>
+
+            </label>
+
+
+            <!-- Shaded -->
+            <label class="switch-row">
+
+                <span>
+                    Shaded Faces
+                </span>
+
+                <input
+                    id="shaded"
+                    type="checkbox"
+                    checked
+                >
+
+                <span class="switch"></span>
+
+            </label>
+
+
+            <!-- Wireframe -->
+            <label class="switch-row">
+
+                <span>
+                    Wireframe
+                </span>
+
+                <input
+                    id="wireframe"
+                    type="checkbox"
+                >
+
+                <span class="switch"></span>
+
+            </label>
+
+
+            <!-- Buttons -->
+            <div class="button-row">
+
+                <button
+                    id="resetBtn"
+                    class="primary"
+                >
+                    Reset
+                </button>
+
+                <button id="viewBtn">
+                    Default View
+                </button>
+
+            </div>
+
+
+            <!-- Pipeline -->
+            <div class="info-card">
+
+                <h3>
+                    Pipeline
+                </h3>
+
+                <p>
+                    3D Geometry → Rotation → Scaling →
+                    Camera/View → Perspective Projection →
+                    2D Rendering
+                </p>
+
+            </div>
+
+
+            <!-- Controls Information -->
+            <div class="info-card">
+
+                <h3>
+                    Controls
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Sliders: independent X/Y/Z rotation
+                    </li>
+
+                    <li>
+                        Drag: change camera yaw/pitch
+                    </li>
+
+                    <li>
+                        Wheel: camera distance
+                    </li>
+
+                    <li>
+                        Auto Rotate: continuous animation
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <span>
+            8 vertices • 12 edges • 6 faces • Perspective projection
+        </span>
+
+        <span>
+            HTML5 Canvas + JavaScript
+        </span>
+
+    </footer>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
