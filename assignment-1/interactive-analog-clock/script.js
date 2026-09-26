@@ -653,6 +653,7 @@ function drawHands() {
 
 // =====================================================
 // DIGITAL CLOCK
+// BANGLADESH TIME — 12 HOUR FORMAT
 // =====================================================
 
 function updateDigitalClock() {
@@ -661,33 +662,40 @@ function updateDigitalClock() {
         new Date();
 
 
-    const hours =
-        String(
-            now.getHours()
-        ).padStart(2, "0");
+    /*
+        Bangladesh Time Zone:
+        Asia/Dhaka
 
+        12-hour format:
+        01:30:25 PM
+    */
 
-    const minutes =
-        String(
-            now.getMinutes()
-        ).padStart(2, "0");
-
-
-    const seconds =
-        String(
-            now.getSeconds()
-        ).padStart(2, "0");
+    const timeString =
+        now.toLocaleTimeString(
+            "en-US",
+            {
+                timeZone: "Asia/Dhaka",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true
+            }
+        );
 
 
     digitalTime.textContent =
-        `${hours}:${minutes}:${seconds}`;
+        timeString;
 
 
-    // Date
+    // -----------------------------------------------
+    // Bangladesh Date
+    // -----------------------------------------------
+
     dateDisplay.textContent =
         now.toLocaleDateString(
-            undefined,
+            "en-US",
             {
+                timeZone: "Asia/Dhaka",
                 weekday: "long",
                 year: "numeric",
                 month: "long",
@@ -999,6 +1007,7 @@ canvas.addEventListener(
 
 
         // Keep clock inside
+
         constrainClock();
     }
 );
