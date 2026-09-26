@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interactive Analog Clock | Computer Graphics Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="header">
+
+            <div>
+                <h1>Interactive Analog Clock</h1>
+
+                <p>
+                    Computer Graphics Lab — Assignment 1
+                </p>
+            </div>
+
+        </header>
+
+
+        <!-- ================= MAIN WORKSPACE ================= -->
+
+        <main class="workspace">
+
+
+            <!-- ================= CANVAS AREA ================= -->
+
+            <section class="drawing-area">
+
+                <canvas id="clockCanvas"></canvas>
+
+                <div class="canvas-hint">
+                    Drag the clock to move • Scroll to zoom
+                </div>
+
+            </section>
+
+
+            <!-- ================= CONTROL PANEL ================= -->
+
+            <aside class="control-panel">
+
+                <h2>Controls</h2>
+
+
+                <!-- Reset -->
+
+                <button
+                    id="resetBtn"
+                    class="control-button"
+                >
+                    Reset
+                </button>
+
+
+                <!-- Center -->
+
+                <button
+                    id="centerBtn"
+                    class="control-button secondary"
+                >
+                    Center Clock
+                </button>
+
+
+                <!-- Zoom -->
+
+                <div class="control-section">
+
+                    <label for="zoomSlider">
+                        Scale / Zoom
+                    </label>
+
+                    <input
+                        type="range"
+                        id="zoomSlider"
+                        min="0.5"
+                        max="2"
+                        step="0.01"
+                        value="1"
+                    >
+
+                    <div class="zoom-info">
+
+                        <span>50%</span>
+
+                        <strong id="zoomValue">
+                            100%
+                        </strong>
+
+                        <span>200%</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Digital Time -->
+
+                <div class="digital-section">
+
+                    <p class="section-title">
+                        Current Local Time
+                    </p>
+
+                    <div id="digitalTime">
+                        00:00:00
+                    </div>
+
+                    <div id="dateDisplay">
+                        Loading...
+                    </div>
+
+                </div>
+
+
+                <!-- Interaction -->
+
+                <div class="interaction-section">
+
+                    <h3>Interaction</h3>
+
+                    <ul>
+
+                        <li>
+                            <span>🖱️</span>
+                            Drag — Translate
+                        </li>
+
+                        <li>
+                            <span>🔍</span>
+                            Mouse Wheel — Zoom
+                        </li>
+
+                        <li>
+                            <span>↻</span>
+                            R — Reset
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- CG Concepts -->
+
+                <div class="concept-section">
+
+                    <h3>CG Concepts</h3>
+
+                    <div class="tags">
+
+                        <span>Primitives</span>
+                        <span>Rotation</span>
+                        <span>Translation</span>
+                        <span>Scaling</span>
+                        <span>Animation</span>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </main>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <p>
+                2D Graphics • Coordinate Transformation • Real-Time Animation
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
